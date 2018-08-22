@@ -1,3 +1,26 @@
+.company {
+    padding: 60px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
 .company__title {
-    color: red;
+    color: #264679;
+    text-align: center;
+}
+
+.company__disclaimer {
+    text-align: center;
+}
+
+.company__cars {
+    margin-top: 80px;
+}
+
+.company__car {
+    border: 1px solid #264679;
+    list-style: none;
+    padding: 40px;
+    margin-top: 15px;
+    border-radius: 15px;
 }

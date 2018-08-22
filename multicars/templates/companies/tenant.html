@@ -7,11 +7,11 @@
     
         <ul class="company__cars">
             {% for car in object_list %}
-                <li>
-                    {{ car.model }}
-                    {{ car.year }}
-                    {{ car.color }}
-                    {{ car.stock }}
+                <li class="company__car">
+                    <h3>{{ car.model }}</h3>
+                    <p><b>Year:</b>  {{ car.year }}</p>
+                    <p><b>Color:</b>  {{ car.color }}</p>
+                    <h4><b>Stock:</b> {{ car.stock }}</h4>
                 </li>
             {% endfor %}
         </ul>
