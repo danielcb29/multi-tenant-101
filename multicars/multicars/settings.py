@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['localhost', '.localhost'] ## Important
 
 # Application definition
 
-SHARED_APPS = [
+SHARED_APPS = (
     'django_tenants',  # mandatory
     'companies', # you must list the app where your tenant model resides in
 
@@ -40,17 +40,18 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+)
 
-TENANT_APPS = [
+TENANT_APPS = (
     # The following Django contrib apps must be in TENANT_APPS
     'django.contrib.contenttypes',
 
     # your tenant-specific apps
     'cars',
-]
+)
 
-INSTALLED_APPS = SHARED_APPS + [app for app in TENANT_APPS if app not in SHARED_APPS]
+INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
+
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware', ## Important
