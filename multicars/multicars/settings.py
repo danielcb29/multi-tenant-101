@@ -25,7 +25,7 @@ SECRET_KEY = 'u1g62$u6owa6s9jo7d(#sji7^@q^i=%v64pj8c1ew5(wm67bf*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '.localhost'] ## Important
+ALLOWED_HOSTS = ['.localhost'] ## Important
 
 
 # Application definition
@@ -68,16 +68,17 @@ DATABASE_ROUTERS = [
     'django_tenants.routers.TenantSyncRouter', ## Important
 ]
 
-ROOT_URLCONF = 'multicars.urls'
+ROOT_URLCONF = 'multicars.tenant_urls' ## Important 
+PUBLIC_SCHEMA_URLCONF = 'multicars.public_urls' ## Important
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
+                'django.template.context_processors.debug',                
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
