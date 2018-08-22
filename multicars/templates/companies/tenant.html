@@ -3,4 +3,16 @@
 {% block content %}
     <h1> Welcome to the {{ company.name }} site! </h1>
     <p>You can see the cars available in the following list</p>
+
+    <ul>
+        {% for car in object_list %}
+            <li>
+                {{ car.model }}
+                {{ car.year }}
+                {{ car.color }}
+                {{ car.stock }}
+            </li>
+        {% endfor %}
+    </ul>
+    
 {% endblock content %}
