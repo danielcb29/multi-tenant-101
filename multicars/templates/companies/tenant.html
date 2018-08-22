@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1> Welcome to the {{ company.name }} site! </h1>
-    <p>You can see the cars available in the following list</p>
-
-    <ul>
-        {% for car in object_list %}
-            <li>
-                {{ car.model }}
-                {{ car.year }}
-                {{ car.color }}
-                {{ car.stock }}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="company">
+        <h1 class="company__title"> Welcome to the {{ company.name }} site! </h1>
+        <p class="company__disclaimer">You can see the cars available in the following list</p>
+    
+        <ul class="company__cars">
+            {% for car in object_list %}
+                <li>
+                    {{ car.model }}
+                    {{ car.year }}
+                    {{ car.color }}
+                    {{ car.stock }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
     
 {% endblock content %}
