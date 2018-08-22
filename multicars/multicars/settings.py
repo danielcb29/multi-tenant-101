@@ -25,21 +25,35 @@ SECRET_KEY = 'u1g62$u6owa6s9jo7d(#sji7^@q^i=%v64pj8c1ew5(wm67bf*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.localhost'] ## Important
 
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
+    'django_tenants',  # mandatory
+    'companies', # you must list the app where your tenant model resides in
+
+    'django.contrib.contenttypes',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
 
+TENANT_APPS = [
+    # The following Django contrib apps must be in TENANT_APPS
+    'django.contrib.contenttypes',
+
+    # your tenant-specific apps
+    'cars',
+]
+
+INSTALLED_APPS = SHARED_APPS + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware', ## Important
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +61,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+DATABASE_ROUTERS = [
+    'django_tenants.routers.TenantSyncRouter', ## Important
 ]
 
 ROOT_URLCONF = 'multicars.urls'
@@ -67,15 +85,17 @@ TEMPLATES = [
     },
 ]
 
+TENANT_MODEL = "companies.Company" 
+TENANT_DOMAIN_MODEL = "companies.Domain"
+
 WSGI_APPLICATION = 'multicars.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-# 'tenant_schemas.postgresql_backend'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_tenants.postgresql_backend', ## Important
         'NAME': 'multicars',
         'USER': 'multicars',
         'PASSWORD': 'multicars',
