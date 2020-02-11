@@ -1,5 +1,5 @@
 psycopg2==2.7.5
-Django==2.0.8
+Django==2.2.10
 django-tenants==2.0.0 
 pytz==2018.5
 psycopg2-binary==2.7.5
